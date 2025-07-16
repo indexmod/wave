@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Интерактивные топографические линии с деформацией, звуком и базовыми настройками изгиба, толщины, тона и пульсации.">
+  <meta name="description" content="Interactive topographic lines with deformation, sound, and basic settings for curvature, thickness, tone, and pulsation.">
   <meta name="author" content="Introdex AI">
-  <meta name="keywords" content="interactive, topographic, canvas, generative, sound, настройка, интерактив">
+  <meta name="keywords" content="interactive, topographic, canvas, generative, sound, controls">
   <title>Interactive Topographic Lines — Controls + Sound</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -34,16 +34,16 @@
 <body>
 
 <div class="controls">
-  <label>Изгиб линий: <span id="bendValue">10</span></label>
+  <label>Line bend: <span id="bendValue">10</span></label>
   <input type="range" id="bend" min="0" max="50" value="10">
 
-  <label>Толщина линий: <span id="thicknessValue">1</span></label>
+  <label>Line thickness: <span id="thicknessValue">1</span></label>
   <input type="range" id="thickness" min="1" max="5" value="1">
 
-  <label>Тон звука: <span id="toneValue">200</span>Hz</label>
+  <label>Sound tone: <span id="toneValue">200</span>Hz</label>
   <input type="range" id="tone" min="100" max="1000" value="200">
 
-  <label>Пульс влияния: <span id="pulseValue">150</span></label>
+  <label>Pulse radius: <span id="pulseValue">150</span></label>
   <input type="range" id="pulse" min="50" max="400" value="150">
 </div>
 
@@ -58,7 +58,7 @@ let height = window.innerHeight;
 canvas.width = width;
 canvas.height = height;
 
-// Настройки
+// Settings
 let bendAmount = 10;
 let lineThickness = 1;
 let baseTone = 200;
@@ -68,11 +68,11 @@ let points = [];
 const linesCount = 30;
 let spacing = height / linesCount;
 
-// Звуковой контекст
+// Audio context
 const AudioContext = window.AudioContext || window.webkitAudioContext;
 const audioCtx = new AudioContext();
 
-// Генерация линий
+// Generate lines
 function generateLines() {
     points = [];
     spacing = height / linesCount;
@@ -89,7 +89,7 @@ generateLines();
 
 let mouse = {x: width/2, y: height/2, isMoving: false};
 
-// Обработка ресайза
+// Handle resize
 window.addEventListener('resize', () => {
     width = window.innerWidth;
     height = window.innerHeight;
@@ -98,7 +98,7 @@ window.addEventListener('resize', () => {
     generateLines();
 });
 
-// Звук
+// Sound
 function playTone(frequency = 440) {
     const osc = audioCtx.createOscillator();
     const gain = audioCtx.createGain();
@@ -167,7 +167,7 @@ function draw() {
 
 draw();
 
-// Слайдеры
+// Sliders
 const bendSlider = document.getElementById('bend');
 const thicknessSlider = document.getElementById('thickness');
 const toneSlider = document.getElementById('tone');
